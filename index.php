@@ -1,3 +1,10 @@
+<?php
+    include_once("conexao.php");
+
+    $sql = "SELECT * FROM aluno";
+    $result = $conexao->query($sql);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,12 +13,21 @@
     <title>Document</title>
 </head>
 <body>
-    <form method="get" action="resultado.php">
-        N1: <input type="number" name="n1">
-        <br><br>
-        N2: <input type="number" name="n2">
-        <br><br>
-        <input type="submit" value="Somar">
-    </form>
+    <table border="1" width="100%">
+        <tr>
+            <th>ID</th>
+            <th>NOME</th>
+            <th>RA</th>
+            <th>EMAIL</th>
+        </tr>
+        <?php while($row = $result->fetch(PDO::FETCH_OBJ)) { ?>
+            <tr>
+                <td><?php echo $row->id ?></td>
+                <td><?php echo $row->nome ?></td>
+                <td><?php echo $row->ra ?></td>
+                <td><?php echo $row->email ?></td>
+            </tr>
+        <?php } ?>
+    </table>
 </body>
 </html>
